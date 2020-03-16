@@ -77,7 +77,29 @@ public class Controller {
 
     @FXML
     private void addClick() {
-        // TODO add a student to studentlist
+        Student studentToAdd;
+        String fname;
+        String lname;
+        int credits;
+        try {
+            fname = fnameTxt.getText();
+            lname = lnameTxt.getText();
+            credits = Integer.parseInt(creditsTxt.getText());
+            if (inRad.isSelected()) {
+                int funds = Integer.parseInt(valTxt.getText());
+                studentToAdd = new Instate(fname, lname, credits, fundingChk.isSelected() ? funds : 0);
+            }
+            else if (outRad.isSelected()) {
+                studentToAdd = new Outstate(fname, lname, credits, triChk.isSelected() ? 'T' : 'F');
+            }
+            else {
+                studentToAdd = new International(fname, lname, credits, exchangeChk.isSelected() ? 'T' : 'F');
+            }
+            students.add(studentToAdd);
+        }
+        catch(Exception e) {
+            outputTextArea.setText("Error");
+        }
     }
 
     @FXML
@@ -87,6 +109,6 @@ public class Controller {
 
     @FXML
     private void printClick() {
-        // TODO print the studentlist
+        outputTextArea.setText(students.toString());
     }
 }
