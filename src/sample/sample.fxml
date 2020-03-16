@@ -23,7 +23,7 @@
                      <children>
                         <VBox fx:id="studentVbox" prefHeight="101.0" prefWidth="111.0">
                            <children>
-                              <RadioButton fx:id="inRad" mnemonicParsing="false" text="INSTATE">
+                              <RadioButton fx:id="inRad" mnemonicParsing="false" selected="true" text="INSTATE">
                                  <padding>
                                     <Insets bottom="25.0" />
                                  </padding>
@@ -46,12 +46,12 @@
                                     <Insets bottom="25.0" />
                                  </padding>
                               </CheckBox>
-                              <CheckBox fx:id="triChk" mnemonicParsing="false" text="Tri-State Student">
+                              <CheckBox fx:id="triChk" disable="true" mnemonicParsing="false" text="Tri-State Student">
                                  <padding>
                                     <Insets bottom="25.0" />
                                  </padding>
                               </CheckBox>
-                              <CheckBox fx:id="exchangeChk" mnemonicParsing="false" text="Exchange Student" />
+                              <CheckBox fx:id="exchangeChk" disable="true" mnemonicParsing="false" text="Exchange Student" />
                            </children>
                            <HBox.margin>
                               <Insets right="40.0" />
