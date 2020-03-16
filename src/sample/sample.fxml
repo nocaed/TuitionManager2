@@ -23,17 +23,17 @@
                      <children>
                         <VBox fx:id="studentVbox" prefHeight="101.0" prefWidth="111.0">
                            <children>
-                              <RadioButton fx:id="inRad" mnemonicParsing="false" selected="true" text="INSTATE">
+                              <RadioButton fx:id="inRad" mnemonicParsing="false" onMouseClicked="#instateSelect" selected="true" text="INSTATE">
                                  <padding>
                                     <Insets bottom="25.0" />
                                  </padding>
                               </RadioButton>
-                              <RadioButton fx:id="outRad" mnemonicParsing="false" text="OUTSTATE">
+                              <RadioButton fx:id="outRad" mnemonicParsing="false" onMouseClicked="#outstateSelect" text="OUTSTATE">
                                  <padding>
                                     <Insets bottom="25.0" />
                                  </padding>
                               </RadioButton>
-                              <RadioButton fx:id="intRad" mnemonicParsing="false" text="INTERNATIONAL" />
+                              <RadioButton fx:id="intRad" mnemonicParsing="false" onMouseClicked="#internationalSelect" text="INTERNATIONAL" />
                            </children>
                            <HBox.margin>
                               <Insets right="10.0" />
