@@ -122,4 +122,27 @@ public class StudentList {
             }
         }
     }
+
+    @Override
+    /**
+     * Generates a formatted list of Students.
+     * @author Thomas Brewer
+     * @return A String of formatted Students separated by newlines
+     */
+    public String toString() {
+        if (this.numStudents == 0) {
+            return "No students added yet.";
+        }
+
+        String studentStr = "";
+        NumberFormat myFormat = NumberFormat.getInstance();
+        myFormat.setGroupingUsed(true);
+
+        for(Student student : students) {
+            if (student != null) {
+                studentStr += student + " tuition due: $" + myFormat.format(student.tuitionDue()) + "\n";
+            }
+        }
+        return studentStr;
+    }
 }
