@@ -43,6 +43,7 @@ public class Controller {
 
     @FXML
     private void instateSelect() {
+        valTxt.setDisable(false);
         inRad.setSelected(true);
         outRad.setSelected(false);
         intRad.setSelected(false);
@@ -54,6 +55,8 @@ public class Controller {
     }
     @FXML
     private void outstateSelect() {
+        valTxt.setDisable(true);
+        valTxt.setText("");
         outRad.setSelected(true);
         inRad.setSelected(false);
         intRad.setSelected(false);
@@ -65,6 +68,8 @@ public class Controller {
     }
     @FXML
     private void internationalSelect() {
+        valTxt.setDisable(true);
+        valTxt.setText("");
         intRad.setSelected(true);
         outRad.setSelected(false);
         inRad.setSelected(false);
@@ -77,29 +82,7 @@ public class Controller {
 
     @FXML
     private void addClick() {
-        Student studentToAdd;
-        String fname;
-        String lname;
-        int credits;
-        try {
-            fname = fnameTxt.getText();
-            lname = lnameTxt.getText();
-            credits = Integer.parseInt(creditsTxt.getText());
-            if (inRad.isSelected()) {
-                int funds = Integer.parseInt(valTxt.getText());
-                studentToAdd = new Instate(fname, lname, credits, fundingChk.isSelected() ? funds : 0);
-            }
-            else if (outRad.isSelected()) {
-                studentToAdd = new Outstate(fname, lname, credits, triChk.isSelected() ? 'T' : 'F');
-            }
-            else {
-                studentToAdd = new International(fname, lname, credits, exchangeChk.isSelected() ? 'T' : 'F');
-            }
-            students.add(studentToAdd);
-        }
-        catch(Exception e) {
-            outputTextArea.setText("Error");
-        }
+        students.add(genStudent());
     }
 
     @FXML
@@ -110,5 +93,32 @@ public class Controller {
     @FXML
     private void printClick() {
         outputTextArea.setText(students.toString());
+    }
+
+    private Student genStudent() {
+        Student studentToAdd = null;
+        String fname;
+        String lname;
+        int credits;
+        try {
+            fname = fnameTxt.getText();
+            lname = lnameTxt.getText();
+            credits = Integer.parseInt(creditsTxt.getText());
+            if (inRad.isSelected()) {
+                int funds = fundingChk.isSelected() ? Integer.parseInt(valTxt.getText()) : 0;
+                studentToAdd = new Instate(fname, lname, credits, funds);
+            }
+            else if (outRad.isSelected()) {
+                studentToAdd = new Outstate(fname, lname, credits, triChk.isSelected() ? 'T' : 'F');
+            }
+            else {
+                studentToAdd = new International(fname, lname, credits, exchangeChk.isSelected() ? 'T' : 'F');
+            }
+        }
+        // TODO a ton of specific exception handling
+        catch(Exception e) {
+            outputTextArea.setText("Error");
+        }
+        return studentToAdd;
     }
 }
