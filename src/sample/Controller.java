@@ -29,9 +29,55 @@ public class Controller {
                         outRad,
                         intRad;
     @FXML
-    private CheckBox findingChk,
+    private CheckBox fundingChk,
                      triChk,
                      exchangeChk;
     @FXML
     private TextArea outputTextArea;
+
+    private StudentList students;
+
+    public Controller() {
+        students = new StudentList();
+    }
+
+    @FXML
+    private void instateSelect() {
+        outRad.setSelected(false);
+        intRad.setSelected(false);
+        fundingChk.setDisable(false);
+        triChk.setDisable(true);
+        exchangeChk.setDisable(true);
+    }
+    @FXML
+    private void outstateSelect() {
+        inRad.setSelected(false);
+        intRad.setSelected(false);
+        fundingChk.setDisable(true);
+        triChk.setDisable(false);
+        exchangeChk.setDisable(true);
+    }
+    @FXML
+    private void internationalSelect() {
+        outRad.setSelected(false);
+        inRad.setSelected(false);
+        fundingChk.setDisable(true);
+        triChk.setDisable(true);
+        exchangeChk.setDisable(false);
+    }
+
+    @FXML
+    private void addClick() {
+        // TODO add a student to studentlist
+    }
+
+    @FXML
+    private void removeClick() {
+        // TODO remove a student from studentList
+    }
+
+    @FXML
+    private void printClick() {
+        // TODO print the studentlist
+    }
 }
