@@ -43,6 +43,7 @@ public class Controller {
 
     @FXML
     private void instateSelect() {
+        inRad.setSelected(true);
         outRad.setSelected(false);
         intRad.setSelected(false);
         fundingChk.setDisable(false);
@@ -53,6 +54,7 @@ public class Controller {
     }
     @FXML
     private void outstateSelect() {
+        outRad.setSelected(true);
         inRad.setSelected(false);
         intRad.setSelected(false);
         fundingChk.setDisable(true);
@@ -63,6 +65,7 @@ public class Controller {
     }
     @FXML
     private void internationalSelect() {
+        intRad.setSelected(true);
         outRad.setSelected(false);
         inRad.setSelected(false);
         fundingChk.setDisable(true);
