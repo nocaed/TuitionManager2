@@ -11,7 +11,7 @@ public class TuitionManager extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Tuition Manager");
+        primaryStage.setTitle("Program 3 - Tuition Manager");
         primaryStage.setScene(new Scene(root, 600, 700));
         primaryStage.show();
     }
