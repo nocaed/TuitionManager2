@@ -47,22 +47,28 @@ public class Controller {
         intRad.setSelected(false);
         fundingChk.setDisable(false);
         triChk.setDisable(true);
+        triChk.setSelected(false);
         exchangeChk.setDisable(true);
+        exchangeChk.setSelected(false);
     }
     @FXML
     private void outstateSelect() {
         inRad.setSelected(false);
         intRad.setSelected(false);
         fundingChk.setDisable(true);
+        fundingChk.setSelected(false);
         triChk.setDisable(false);
         exchangeChk.setDisable(true);
+        exchangeChk.setSelected(false);
     }
     @FXML
     private void internationalSelect() {
         outRad.setSelected(false);
         inRad.setSelected(false);
         fundingChk.setDisable(true);
+        fundingChk.setSelected(false);
         triChk.setDisable(true);
+        triChk.setSelected(false);
         exchangeChk.setDisable(false);
     }
 

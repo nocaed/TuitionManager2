@@ -65,15 +65,15 @@
                   </HBox>
                   <VBox layoutX="453.0" layoutY="25.0" prefHeight="114.0" prefWidth="131.0">
                      <children>
-                        <Button fx:id="addBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Add">
+                        <Button fx:id="addBtn" mnemonicParsing="false" onMouseClicked="#addClick" prefHeight="25.0" prefWidth="100.0" text="Add">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" top="7.0" />
                            </VBox.margin></Button>
-                        <Button fx:id="removeBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Remove">
+                        <Button fx:id="removeBtn" mnemonicParsing="false" onMouseClicked="#removeClick" prefHeight="25.0" prefWidth="100.0" text="Remove">
                            <VBox.margin>
                               <Insets bottom="10.0" left="15.0" />
                            </VBox.margin></Button>
-                        <Button fx:id="printBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Print">
+                        <Button fx:id="printBtn" mnemonicParsing="false" onMouseClicked="#printClick" prefHeight="25.0" prefWidth="100.0" text="Print">
                            <VBox.margin>
                               <Insets left="15.0" />
                            </VBox.margin></Button>
