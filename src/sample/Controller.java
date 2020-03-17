@@ -4,11 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.*;
 
 public class Controller {
     @FXML
@@ -43,10 +39,10 @@ public class Controller {
 
     @FXML
     private void instateSelect() {
-        valTxt.setDisable(false);
         inRad.setSelected(true);
         outRad.setSelected(false);
         intRad.setSelected(false);
+        toggleValTxt(true);
         fundingChk.setDisable(false);
         triChk.setDisable(true);
         triChk.setSelected(false);
@@ -55,11 +51,10 @@ public class Controller {
     }
     @FXML
     private void outstateSelect() {
-        valTxt.setDisable(true);
-        valTxt.setText("");
         outRad.setSelected(true);
         inRad.setSelected(false);
         intRad.setSelected(false);
+        toggleValTxt(true);
         fundingChk.setDisable(true);
         fundingChk.setSelected(false);
         triChk.setDisable(false);
@@ -68,11 +63,10 @@ public class Controller {
     }
     @FXML
     private void internationalSelect() {
-        valTxt.setDisable(true);
-        valTxt.setText("");
         intRad.setSelected(true);
         outRad.setSelected(false);
         inRad.setSelected(false);
+        toggleValTxt(true);
         fundingChk.setDisable(true);
         fundingChk.setSelected(false);
         triChk.setDisable(true);
@@ -81,7 +75,18 @@ public class Controller {
     }
 
     @FXML
+    private void fundsCheck() {
+        if(!fundingChk.isDisabled()) {
+            if(fundingChk.isSelected())
+                toggleValTxt(false);
+            else
+                toggleValTxt(true);
+        }
+    }
+
+    @FXML
     private void addClick() {
+        // TODO display error message if student is null
         students.add(genStudent());
     }
 
@@ -97,13 +102,10 @@ public class Controller {
 
     private Student genStudent() {
         Student studentToAdd = null;
-        String fname;
-        String lname;
-        int credits;
         try {
-            fname = fnameTxt.getText();
-            lname = lnameTxt.getText();
-            credits = Integer.parseInt(creditsTxt.getText());
+            String fname = fnameTxt.getText();
+            String lname = lnameTxt.getText();
+            int credits = Integer.parseInt(creditsTxt.getText());
             if (inRad.isSelected()) {
                 int funds = fundingChk.isSelected() ? Integer.parseInt(valTxt.getText()) : 0;
                 studentToAdd = new Instate(fname, lname, credits, funds);
@@ -120,5 +122,11 @@ public class Controller {
             outputTextArea.setText("Error");
         }
         return studentToAdd;
+    }
+
+    private void toggleValTxt(boolean disabled) {
+        valTxt.setDisable(disabled);
+        if(disabled)
+            valTxt.setText("");
     }
 }
