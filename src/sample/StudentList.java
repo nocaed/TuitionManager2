@@ -118,7 +118,7 @@ public class StudentList {
 
         for(Student student : students) {
             if (student != null) {
-                System.out.println(student + " tuition due: $" + myFormat.format(student.tuitionDue()));
+                System.out.println(student + " Tuition due: $" + myFormat.format(student.tuitionDue()));
             }
         }
     }
@@ -140,7 +140,7 @@ public class StudentList {
 
         for(Student student : students) {
             if (student != null) {
-                studentStr += student + " tuition due: $" + myFormat.format(student.tuitionDue()) + "\n";
+                studentStr += student + " Tuition due: $" + myFormat.format(student.tuitionDue()) + "\n";
             }
         }
         return studentStr;

@@ -42,7 +42,7 @@ public class Instate extends Student {
      * @return The Student toString plus the amount of funds the instate student has
      */
     public String toString() {
-        return super.toString() + " has " + funds + " funds.";
+        return super.toString() + " has $" + funds + " in funds.";
     }
 
     public static void main(String[] args) {
