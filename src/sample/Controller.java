@@ -3,6 +3,7 @@ package sample;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -108,6 +109,8 @@ public class Controller {
         try {
             String fname = fnameTxt.getText();
             String lname = lnameTxt.getText();
+            if(fname.equals("") || lname.equals(""))
+                throw new Exception("Error, the student must have a first and last name.");
             int credits = Integer.parseInt(creditsTxt.getText());
             if(credits < 1)
                 throw new Exception("Error, the number of credits must be 1 or greater.");
@@ -121,6 +124,8 @@ public class Controller {
                 studentToAdd = new Outstate(fname, lname, credits, triChk.isSelected() ? 'T' : 'F');
             }
             else {
+                if(credits < 9)
+                    throw new Exception("Error, international students must have at least 9 credits.");
                 studentToAdd = new International(fname, lname, credits, exchangeChk.isSelected() ? 'T' : 'F');
             }
         }
