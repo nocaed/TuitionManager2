@@ -109,8 +109,12 @@ public class Controller {
             String fname = fnameTxt.getText();
             String lname = lnameTxt.getText();
             int credits = Integer.parseInt(creditsTxt.getText());
+            if(credits < 1)
+                throw new Exception("Error, the number of credits must be 1 or greater.");
             if (inRad.isSelected()) {
                 int funds = fundingChk.isSelected() ? Integer.parseInt(valTxt.getText()) : 0;
+                if(funds < 0)
+                    throw new Exception("Error, the number of funds must be 0 or greater.");
                 studentToAdd = new Instate(fname, lname, credits, funds);
             }
             else if (outRad.isSelected()) {
@@ -120,12 +124,11 @@ public class Controller {
                 studentToAdd = new International(fname, lname, credits, exchangeChk.isSelected() ? 'T' : 'F');
             }
         }
-        // TODO a ton of specific exception handling
         catch(NumberFormatException nfe) {
             outputTextArea.setText("Error," + nfe.toString().split(":")[2] + " is not an integer.");
         }
         catch(Exception e) {
-            outputTextArea.setText(e.toString());
+            outputTextArea.setText(e.toString().split(":")[1].trim());
         }
         return studentToAdd;
     }
