@@ -1,3 +1,4 @@
+package sample;
 import java.util.Scanner;
 /**
  * The tuition manager class performs the bulk of interaction with the user.  All I/O is handled in this class.
