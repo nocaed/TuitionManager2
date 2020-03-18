@@ -86,13 +86,16 @@ public class Controller {
 
     @FXML
     private void addClick() {
-        // TODO display error message if student is null
-        students.add(genStudent());
+        Student student = genStudent();
+        if(student != null)
+            students.add(student);
     }
 
     @FXML
     private void removeClick() {
-        // TODO remove a student from studentList
+        Student student = genStudent();
+        if(student != null)
+            students.remove(student);
     }
 
     @FXML
