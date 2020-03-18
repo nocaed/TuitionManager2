@@ -3,7 +3,6 @@ package sample;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -143,4 +142,6 @@ public class Controller {
         if(disabled)
             valTxt.setText("");
     }
+
+    // TODO make methods for generating Student subclasses and validating base student input
 }
