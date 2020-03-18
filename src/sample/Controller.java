@@ -118,8 +118,11 @@ public class Controller {
             }
         }
         // TODO a ton of specific exception handling
+        catch(NumberFormatException nfe) {
+            outputTextArea.setText("Error," + nfe.toString().split(":")[2] + " is not an integer.");
+        }
         catch(Exception e) {
-            outputTextArea.setText("Error");
+            outputTextArea.setText(e.toString());
         }
         return studentToAdd;
     }
