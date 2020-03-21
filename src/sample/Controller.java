@@ -1,6 +1,7 @@
 package sample;
 
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -108,31 +109,12 @@ public class Controller {
         try {
             String fname = fnameTxt.getText();
             String lname = lnameTxt.getText();
-            if(fname.equals("") || lname.equals(""))
-                throw new Exception("Error, the student must have a first and last name.");
             int credits = Integer.parseInt(creditsTxt.getText());
-            if(credits < 1)
-                throw new Exception("Error, the number of credits must be 1 or greater.");
-            if (inRad.isSelected()) {
-                int funds = fundingChk.isSelected() ? Integer.parseInt(valTxt.getText()) : 0;
-                if(funds < 0)
-                    throw new Exception("Error, the number of funds must be 0 or greater.");
-                studentToAdd = new Instate(fname, lname, credits, funds);
-            }
-            else if (outRad.isSelected()) {
-                studentToAdd = new Outstate(fname, lname, credits, triChk.isSelected() ? 'T' : 'F');
-            }
-            else {
-                if(credits < 9)
-                    throw new Exception("Error, international students must have at least 9 credits.");
-                studentToAdd = new International(fname, lname, credits, exchangeChk.isSelected() ? 'T' : 'F');
-            }
+            validateBaseInput(fname, lname, credits);
+            studentToAdd = inRad.isSelected() ? genInstate(fname, lname, credits) : outRad.isSelected() ? genOutstate(fname, lname, credits) : genInternational(fname, lname, credits);
         }
         catch(NumberFormatException nfe) {
-            outputTextArea.setText("Error," + nfe.toString().split(":")[2] + " is not an integer.");
-        }
-        catch(Exception e) {
-            outputTextArea.setText(e.toString().split(":")[1].trim());
+            printNumberFormatException(nfe);
         }
         return studentToAdd;
     }
@@ -143,5 +125,57 @@ public class Controller {
             valTxt.setText("");
     }
 
-    // TODO make methods for generating Student subclasses and validating base student input
+    private Instate genInstate(String fname, String lname, int credits) {
+        Instate student = null;
+        try {
+            int funds = fundingChk.isSelected() ? Integer.parseInt(valTxt.getText()) : 0;
+            if (funds < 0)
+                throw new Exception("Error, the number of funds must be 0 or greater.");
+            student = new Instate(fname, lname, credits, funds);
+        }
+        catch(NumberFormatException nfe) {
+            printNumberFormatException(nfe);
+        }
+        catch(Exception e) {
+            printGenericException(e);
+        }
+        return student;
+    }
+
+    private Outstate genOutstate(String fname, String lname, int credits) {
+        return new Outstate(fname, lname, credits, triChk.isSelected() ? 'T' : 'F');
+    }
+
+    private International genInternational(String fname, String lname, int credits) {
+        International student = null;
+        try {
+            if (credits < 9)
+                throw new Exception("Error, international students must have at least 9 credits.");
+            student = new International(fname, lname, credits, exchangeChk.isSelected() ? 'T' : 'F');
+        }
+        catch(Exception e) {
+            printGenericException(e);
+        }
+        return student;
+    }
+
+    private void validateBaseInput(String fname, String lname, int credits) {
+        try {
+            if (fname.equals("") || lname.equals(""))
+                throw new Exception("Error, the student must have a first and last name.");
+            if (credits < 1)
+                throw new Exception("Error, the number of credits must be 1 or greater.");
+        }
+        catch(Exception e) {
+            printGenericException(e);
+        }
+    }
+
+    private void printNumberFormatException(NumberFormatException nfe) {
+        outputTextArea.setText("Error," + nfe.toString().split(":")[2] + " is not an integer.");
+    }
+
+    private void printGenericException(Exception e) {
+        outputTextArea.setText(e.toString().split(":")[1].trim());
+    }
 }
