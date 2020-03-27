@@ -1,2 +1,4 @@
 TuitionManager2.iml
 .idea/*
+*.class
+out/production/TuitionManager2/sample/sample.fxml
