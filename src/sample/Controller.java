@@ -144,10 +144,19 @@ public class Controller {
      * @author Thomas Brewer
      */
     private void removeClick() {
-        // Remove a Student if all input is valid
-        Student student = genStudent();
-        if(student != null)
-            students.remove(student);
+        try {
+            boolean found = false;
+            // Remove a Student if all input is valid
+            Student student = genStudent();
+            if(student != null)
+                found = students.remove(student);
+
+            if (!found)
+                throw new Exception("Student not found.");
+
+        } catch (Exception e) {
+            printGenericException(e);
+        }
     }
 
     @FXML
@@ -174,12 +183,16 @@ public class Controller {
             int credits = Integer.parseInt(creditsTxt.getText());
             // Validates the input for the student's credentials
             validateBaseInput(fname, lname, credits);
+            if (credits < 1) {
+                throw new Exception("Error: Credits must be at least 1.");
+            }
             // Generate a Student based on the selected radio button
             studentToAdd = inRad.isSelected() ? genInstate(fname, lname, credits) : outRad.isSelected() ? genOutstate(fname, lname, credits) : genInternational(fname, lname, credits);
         }
         // Catches an error in parsing credits
-        catch(NumberFormatException nfe) {
-            printNumberFormatException(nfe);
+        catch(Exception e) {
+            studentToAdd = null;
+            printGenericException(e);
         }
         return studentToAdd;
     }
@@ -211,14 +224,22 @@ public class Controller {
             // Throw an exception if the student's funds are negative
             if (funds < 0)
                 throw new Exception("Error, the number of funds must be 0 or greater.");
+            if (credits < 1) {
+                throw new Exception("Error: Credits must be at least 1.");
+            }
+            if (credits < 7 && funds > 0) {
+                throw new Exception("Student must be full time to receive funding.");
+            }
             student = new Instate(fname, lname, credits, funds);
         }
         // Catches an integer parsing error
         catch(NumberFormatException nfe) {
+            student = null;
             printNumberFormatException(nfe);
         }
         // Catches negative funding
         catch(Exception e) {
+            student = null;
             printGenericException(e);
         }
         return student;
@@ -254,6 +275,7 @@ public class Controller {
         }
         // Catch the aforementioned error
         catch(Exception e) {
+            student = null;
             printGenericException(e);
         }
         return student;
